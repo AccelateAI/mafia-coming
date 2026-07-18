@@ -8,7 +8,7 @@
   reel.removeAttribute("loop");
 
   // Picking the clip via <source media="…"> isn't reliable: Safari (desktop
-  // and iOS) never honors the media attribute on <video> sources — it just
+  // and iOS) never honors the media attribute on <video> sources, it just
   // skips that source entirely and falls through to the next one, so mobile
   // Safari always ended up on the 16:9 clip. Selecting the src in JS works
   // the same way in every browser.
