@@ -26,6 +26,10 @@
 
   window.setTimeout(revealStage, reduceMotion ? 150 : 350);
 
+  reel.addEventListener("click", () => {
+    reel.muted = !reel.muted;
+  });
+
   reel.addEventListener("ended", () => {
     window.setTimeout(() => {
       reel.currentTime = 0;
