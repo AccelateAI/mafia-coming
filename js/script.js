@@ -7,6 +7,18 @@
 
   reel.removeAttribute("loop");
 
+  // Picking the clip via <source media="…"> isn't reliable: Safari (desktop
+  // and iOS) never honors the media attribute on <video> sources — it just
+  // skips that source entirely and falls through to the next one, so mobile
+  // Safari always ended up on the 16:9 clip. Selecting the src in JS works
+  // the same way in every browser.
+  const MOBILE_SRC = "assets/video/mafia-vogue-legacy-916.mp4";
+  const DESKTOP_SRC = "assets/video/mafia-vogue-legacy-169.mp4";
+  const mobileClip = window.matchMedia("(max-aspect-ratio: 16/9) and (max-width: 1024px)");
+  let isMobileClip = mobileClip.matches;
+
+  reel.src = isMobileClip ? MOBILE_SRC : DESKTOP_SRC;
+
   const revealStage = () => {
     curtain.classList.add("is-hidden");
     reel.play().catch(() => {});
@@ -21,11 +33,8 @@
     }, REST_INTERVAL_MS);
   });
 
-  // <source media="…"> is only re-evaluated when the video reloads, so a
-  // resize/rotation that crosses the mobile/desktop breakpoint (matching
-  // the CSS in style.css) needs an explicit reload to swap the 9:16/16:9 clip.
-  const mobileClip = window.matchMedia("(max-aspect-ratio: 16/9) and (max-width: 1024px)");
-  let isMobileClip = mobileClip.matches;
+  // A resize/rotation that crosses the mobile/desktop breakpoint (matching
+  // the CSS in style.css) swaps in the other clip.
   let resizeTimer;
 
   window.addEventListener("resize", () => {
@@ -34,7 +43,7 @@
       if (mobileClip.matches !== isMobileClip) {
         isMobileClip = mobileClip.matches;
         const wasPlaying = !reel.paused;
-        reel.load();
+        reel.src = isMobileClip ? MOBILE_SRC : DESKTOP_SRC;
         if (wasPlaying) reel.play().catch(() => {});
       }
     }, 200);
