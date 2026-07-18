@@ -12,8 +12,8 @@
   // skips that source entirely and falls through to the next one, so mobile
   // Safari always ended up on the 16:9 clip. Selecting the src in JS works
   // the same way in every browser.
-  const MOBILE_SRC = "assets/video/mafia-vogue-legacy-916.mp4";
-  const DESKTOP_SRC = "assets/video/mafia-vogue-legacy-169.mp4";
+  const MOBILE_SRC = "assets/video/mafia-vogue-coming-916.mp4";
+  const DESKTOP_SRC = "assets/video/mafia-vogue-coming-169.mp4";
   const mobileClip = window.matchMedia("(max-aspect-ratio: 16/9) and (max-width: 1024px)");
   let isMobileClip = mobileClip.matches;
 
