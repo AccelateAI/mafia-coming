@@ -48,51 +48,12 @@ a { color: inherit; }
   filter: saturate(1.03) contrast(1.02);
 }
 
-.reel-blur {
-  display: none;
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: blur(60px) saturate(1.15) brightness(0.92);
-  transform: scale(1.2);
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Genuinely phone/tablet-sized, narrower-than-16:9 viewports always show
-   the full frame instead of cover-cropping it (the wordmark must never
-   be cut off) — but tightened by trimming a fixed 200px off each side of
-   the SOURCE frame (200 to 1080 of the clip's native 1280px width). That
-   keeps the wordmark safely inside (it spans roughly 214-1079px) while
-   cutting the dead fabric margin the horse/text never reach, so the
-   clip reads larger and tighter instead of small and letterboxed. The
-   crop leaves empty bands on all sides, filled by a heavily blurred
-   duplicate of the same clip as ambient glow — the same "cinema mode"
-   trick video apps use for landscape clips on portrait screens. Gated on
-   both aspect ratio AND max-width so a wide-but-short desktop window
-   never gets treated like a phone and shrunk down. */
+/* Genuinely phone/tablet-sized, narrower-than-16:9 viewports load the
+   dedicated 9:16 clip (see index.html source[media]) instead of cover-
+   cropping the 16:9 one, so the wordmark is never cut off. Gated on both
+   aspect ratio AND max-width so a wide-but-short desktop window never
+   gets treated like a phone. */
 @media (max-aspect-ratio: 16/9) and (max-width: 1024px) {
-  .reel-frame {
-    overflow: hidden;
-  }
-
-  .reel {
-    /* object-fit: contain (below) already fits the true 1280/720 frame
-       correctly against whichever dimension is tighter. Scaling the
-       already-correctly-fitted video by a flat 1280/880 crops exactly
-       200px off each side proportionally, in every case, without
-       fighting that fit calculation with a second custom ratio. */
-    object-fit: contain;
-    transform: scale(calc(1280 / 880));
-    transform-origin: center center;
-  }
-
-  .reel-blur {
-    display: block;
-  }
-
   .thread-egg {
     display: none;
   }

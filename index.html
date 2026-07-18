@@ -27,17 +27,6 @@
 
 <main class="stage">
 
-  <video
-    class="reel-blur"
-    id="reelBlur"
-    muted
-    playsinline
-    preload="auto"
-    aria-hidden="true">
-    <source src="assets/video/mafia-vogue-legacy.webm" type="video/webm">
-    <source src="assets/video/mafia-vogue-legacy.mp4" type="video/mp4">
-  </video>
-
   <div class="reel-frame">
     <video
       class="reel"
@@ -47,8 +36,9 @@
       playsinline
       preload="auto"
       poster="assets/img/poster.jpg">
+      <source media="(max-aspect-ratio: 16/9) and (max-width: 1024px)" src="assets/video/mafia-vogue-legacy-916.mp4" type="video/mp4">
       <source src="assets/video/mafia-vogue-legacy.webm" type="video/webm">
-      <source src="assets/video/mafia-vogue-legacy.mp4" type="video/mp4">
+      <source src="assets/video/mafia-vogue-legacy-169.mp4" type="video/mp4">
     </video>
   </div>
 
